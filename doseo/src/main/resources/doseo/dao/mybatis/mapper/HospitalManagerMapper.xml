@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="doseo.dao.mybatis.mapper.HospitalManagerMapper">
+	<cache />
+	<!-- 병원 전체 의사 -->
+	<select id="getDocList" resultType="Doctor">
+		SELECT DOC_ID, DOC_NAME, DOC_LOGIN_ID, D2.DEPT_NAME_ENG AS DEPT_ENG, D2.DEPT_NAME_KOR AS DEPT_KOR, SPECIALITY AS SPECIALITY
+		FROM DOCTOR D1, DEPARTMENT D2
+		WHERE D1.DEPT_ID = D2.DEPT_ID AND D1.HOS_ID = #{hos_id}
+		ORDER BY DEPT_NAME_ENG
+	</select>
+
+	<!-- 병원의 특정과에 속하는 기존의 의사 정보 가져오기 -->
+	<select id ="admin_getDocList" resultType="Doctor">
+		SELECT D1.DOC_ID AS DOC_ID , 
+			D1.DOC_NAME AS DOC_NAME, 
+			D1.DOC_LOGIN_ID AS DOC_LOGIN_ID,
+			 D1.DOC_PWD AS DOC_PWD, 
+			 D1.DEPT_ID AS DEPT_ID, 
+			 D1.HOS_ID AS HOS_ID, 
+			 D1.SPECIALITY AS SPECIALITY
+		FROM DOCTOR D1, DEPARTMENT D2
+		WHERE D1.DEPT_ID = D2.DEPT_ID AND D2.DEPT_NAME_ENG = #{deptName}
+		AND D1.HOS_ID = #{hos_id}
+	</select>
+	
+	<select id="getHospitalByIdAndPassword" resultType="Hospital">
+		SELECT 
+            HOS_ID AS ID,
+			HOS_NAME_KOR AS NAME_KOR, 
+			HOS_NAME_ENG AS NAME_ENG, 
+			TEL,
+			HOS_COUNTRY AS COUNTRY, 
+			HOS_CITY AS CITY, 
+			HOS_DISTRICT AS DISTRICT, 
+			LOCATION, 
+			DETAIL,
+			HOS_CODE
+		FROM HOSPITAL
+        WHERE HOS_LOGIN_ID = #{hos_login_id} AND HOS_PWD = #{hos_pwd}
+	
+	</select>
+	
+	<!-- 의사정보 삭제 -->
+ 	<delete id="deleteDoctor">
+		DELETE FROM DOCTOR
+		WHERE DOC_ID = #{doc_id}
+	</delete> 
+	
+	<!-- 의사 아이디 중복 체크 -->
+	<select id="doc_idCheck" resultType="int">
+		SELECT COUNT(*)
+		FROM DOCTOR
+		WHERE DOC_LOGIN_ID = #{doc_login_id}
+	</select>
+	
+	<!-- 의사 정보 추가 -->
+	<insert id="insertDoctor" parameterType="JoinDoctor">
+		INSERT INTO DOCTOR 
+		VALUES(DOC_SEQ.NEXTVAL, #{doc_name}, #{doc_login_id}, #{doc_pwd}, #{dept_id}, #{hos_id}, #{speciality})
+	</insert> 
+</mapper>
