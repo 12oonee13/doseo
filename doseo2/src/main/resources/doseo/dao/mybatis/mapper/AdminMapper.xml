@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="doseo.dao.mybatis.mapper.AppointmentMapper">
+	<cache/>
+	<!-- 관리자 로그인 -->
+	<select id="getAdminByIdAndPassword" resultType="Member">
+		SELECT USER_ID, PASSWORD, NAME 
+		FROM MEMBER
+		WHERE USER_ID = #{id}
+	</select>
+	
+	<!-- 국가별 이용자 -->
+	<select id="getUserByNationality">
+		SELECT NATIONALITY, COUNT(*) AS TOTAL FROM MEMBER 
+		WHERE NATIONALITY IS NOT NULL 
+		GROUP BY NATIONALITY ORDER BY TOTAL
+	</select>
+	
+	<!-- 회원 탈퇴 -->
+	<!-- 병원, 과, 약국에 대한 정보 등록 -->
+
+	<!-- review total -->
+	<!--  get total user -->
+	
+
+</mapper>

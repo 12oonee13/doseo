@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="doseo.dao.mybatis.mapper.DoctorMapper">
+	<cache />
+
+	<select id="getDoctorById" resultType="Doctor">
+		SELECT D.DOC_ID, D.DOC_NAME, D.DOC_LOGIN_ID, D.DOC_PWD, DE.DEPT_NAME_ENG AS DEPT_ID, H.HOS_NAME_ENG AS HOS_ID, D.SPECIALITY
+		FROM DOCTOR D, DEPARTMENT DE, HOSPITAL H
+		WHERE D.DOC_LOGIN_ID = #{id} AND DE.DEPT_ID = D.DEPT_ID AND H.HOS_ID = D.HOS_ID
+	</select>
+
+	<select id="getDoctorByIdAndPassword" resultType="Doctor">
+		SELECT D.DOC_ID, D.DOC_NAME, D.DOC_LOGIN_ID, D.DOC_PWD, DE.DEPT_NAME_ENG AS DEPT_ID, H.HOS_NAME_ENG AS HOS_ID, D.SPECIALITY
+		FROM DOCTOR D, DEPARTMENT DE, HOSPITAL H
+		WHERE D.DOC_LOGIN_ID = #{param1} AND D.DOC_PWD = #{param2} AND DE.DEPT_ID = D.DEPT_ID AND H.HOS_ID = D.HOS_ID
+	</select>
+	
+	<select id="getTimetable" resultType="Timetable">
+		SELECT DOC_ID, DAY, TIME
+		FROM TIMETABLE
+		WHERE DOC_ID = #{doc_id}
+		ORDER BY(
+		CASE WHEN DAY ='MON' THEN 0
+		WHEN DAY ='TUE' THEN 1
+		WHEN DAY ='WED' THEN 2
+        WHEN DAY ='THR' THEN 3
+        WHEN DAY ='FRI' THEN 4
+        WHEN DAY ='SAT' THEN 5
+        WHEN DAY ='SUN' THEN 6
+		END)
+	</select>
+	
+	<update id="updateTimetable" parameterType="Timetable">
+		UPDATE TIMETABLE
+		SET TIME = #{time}
+		WHERE DOC_ID = #{doc_id} AND DAY = #{day}
+	</update>
+	
+	<select id = "countMonthlyAppointments" resultType="int">
+		SELECT COUNT(*)
+		FROM APPOINTMENT
+		WHERE DOC_ID = #{doc_id} AND TO_CHAR(SYSDATE,'MM') = TO_CHAR(AP_DATE,'MM')
+	</select>
+
+	<select id = "countTodayAppointments" resultType="int">
+		SELECT COUNT(*)
+		FROM APPOINTMENT
+		WHERE DOC_ID = #{doc_id} AND TO_CHAR(SYSDATE,'YYMMDD') = TO_CHAR(AP_DATE,'YYMMDD')
+	</select>
+
+	<select id = "countMonthlyGender" resultType="ForCount">
+		SELECT M.GENDER AS STR , COUNT(*) AS NUM
+		FROM MEMBER M, APPOINTMENT A
+		WHERE M.USER_ID = A.USER_ID AND A.DOC_ID = #{doc_id}
+		GROUP BY M.GENDER
+		ORDER BY (
+		CASE WHEN M.GENDER ='female' THEN 0
+		WHEN M.GENDER ='male' THEN 1
+		WHEN M.GENDER ='none' THEN 2
+		END)
+	</select>
+	
+	<select id = "countAge" resultType="ForCount">
+	SELECT DISTINCT  
+		CASE WHEN (EXTRACT(YEAR FROM SYSDATE) - M.AGE) BETWEEN 0 AND 19 THEN '0-19'
+		    WHEN (EXTRACT(YEAR FROM SYSDATE) - M.AGE) BETWEEN 20 AND 29 THEN '20-29'
+		    WHEN (EXTRACT(YEAR FROM SYSDATE) - M.AGE) BETWEEN 30 AND 39 THEN '30-39'
+		    WHEN (EXTRACT(YEAR FROM SYSDATE) - M.AGE) BETWEEN 40 AND 49 THEN '40-49'
+		    WHEN (EXTRACT(YEAR FROM SYSDATE) - M.AGE) BETWEEN 50 AND 59 THEN '50-59'
+		    WHEN (EXTRACT(YEAR FROM SYSDATE) - M.AGE) > 60 THEN '60+'
+	    END AS STR
+	    , COUNT(*) AS NUM
+	FROM MEMBER M, APPOINTMENT A
+	WHERE M.AGE != '-' AND M.USER_ID = A.USER_ID AND A.DOC_ID = #{doc_id}
+	GROUP BY  
+		CASE WHEN (EXTRACT(YEAR FROM SYSDATE) - M.AGE) BETWEEN 0 AND 19 THEN '0-19'
+		    WHEN (EXTRACT(YEAR FROM SYSDATE) - M.AGE) BETWEEN 20 AND 29 THEN '20-29'
+		    WHEN (EXTRACT(YEAR FROM SYSDATE) - M.AGE) BETWEEN 30 AND 39 THEN '30-39'
+		    WHEN (EXTRACT(YEAR FROM SYSDATE) - M.AGE) BETWEEN 40 AND 49 THEN '40-49'
+		    WHEN (EXTRACT(YEAR FROM SYSDATE) - M.AGE) BETWEEN 50 AND 59 THEN '50-59'
+		    WHEN (EXTRACT(YEAR FROM SYSDATE) - M.AGE) > 60 THEN '60+'
+    	END
+    ORDER BY STR
+	</select>
+	
+	<update id="updateDoctor" parameterType="Doctor">
+		UPDATE DOCTOR 
+		SET DOC_NAME = #{doc_name}, DOC_PWD= #{doc_pwd}, SPECIALITY = #{speciality}
+		WHERE DOC_ID = #{doc_id}
+	</update>
+	
+	<select id="get_doctor_appList" resultType="Appointment">
+	SELECT TO_CHAR(A.AP_DATE, 'yyyy-mm-dd')AS AP_DATE, TO_CHAR(A.AP_TIME, 'HH24:MI')AS AP_TIME, A.SELECT_LANGUAGE, A.MESSAGE, M.NAME AS P_NAME, M.GENDER AS P_GENDER, M.AGE AS P_AGE, M.NATIONALITY AS P_NATIONALITY
+	FROM APPOINTMENT A, MEMBER M
+	WHERE DOC_ID = #{doc_id} AND M.USER_ID = A.USER_ID
+	ORDER BY AP_DATE DESC
+	</select>
+	
+	<select id="getDoctorList" resultType="Doctor">
+		SELECT DOC_ID, DOC_NAME, DEPT_ID, HOS_ID, SPECIALITY 
+		FROM DOCTOR 
+		WHERE DEPT_ID=#{dept_id}
+	</select>
+	
+	<select id="getDocTimeList" resultType="Doctor">					
+		SELECT DOC_ID, DAY, TIME
+		FROM TIMETABLE
+		WHERE DOC_ID=#{doc_id}
+	</select>
+</mapper>
