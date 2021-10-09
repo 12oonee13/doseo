@@ -17,4 +17,8 @@ public interface ReviewDao {
 	double getAVGRate(String hos_id);
 	
 	Review getReviewDetailById(String hos_id, String review_id);
+	
+	void insertReview(Review review);
+	
+	public int reviewExistCheck(String ap_id);
 }

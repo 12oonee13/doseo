@@ -192,9 +192,12 @@ public class DoctorController {
 	}
 	
 	@GetMapping("doctor/doctor_logout")
-	public String logout(HttpSession session) throws Exception {
+	public String logout(HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		
 		session.removeAttribute("sessionForUser");
 		session.invalidate();
+		
 		return "redirect:/index";
 	}
 	

@@ -23,9 +23,17 @@ public class Review implements Serializable{
 	private String dept_name_eng;
 	private String doc_name;
 
-	
 	public Review() {}
-
+	
+	//리뷰 등록 시 사용
+	public Review(String detail, String ap_id, String user_id, String rate) {
+		super();
+		this.detail = detail;
+		this.ap_id = ap_id;
+		this.user_id = user_id;
+		this.rate = rate;
+	}
+	
 	public Review(String review_id, String detail, String rate, String user_id, String ap_date) { //0925 서연 추가 
 		super();
 		this.review_id = review_id;

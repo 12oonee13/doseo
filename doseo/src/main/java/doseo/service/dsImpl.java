@@ -142,6 +142,14 @@ public class dsImpl implements dsFacade {
 		return reviewDao.getReviewDetailById(hos_id, review_id);
 	}
 	
+	public void insertReview(Review review) {
+		reviewDao.insertReview(review);
+	}
+	
+	public int reviewExistCheck(String ap_id) {
+		return reviewDao.reviewExistCheck(ap_id);
+	}
+	
 	//hospital search
 	public List<Hospital> getHospitalList(String country, String city, String district){
 		return hospitalDao.getHospitalList(country, city, district);

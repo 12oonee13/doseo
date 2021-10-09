@@ -56,4 +56,17 @@
 		FROM REVIEW R, APPOINTMENT A, DEPARTMENT DE, DOCTOR DO
 		WHERE R.AP_ID = A.AP_ID AND A.DEPT_ID = DE.DEPT_ID AND A.DOC_ID = DO.DOC_ID AND A.HOS_ID =#{hos_id} AND R.REVIEW_ID=#{review_id}
 	</select>
+	
+	<!-- 리뷰 등록 -->
+	<insert id="insertReview" parameterType="Review">
+		INSERT INTO REVIEW
+		VALUES('REV'||REV_SEQ.NEXTVAL, #{detail}, #{ap_id}, #{user_id}, #{rate})
+	</insert>
+	
+	<!-- 리뷰가 이미 존재하는지 체크(이미 존재하면 리뷰 작성이 불가능) -->
+	<select id="reviewExistCheck" resultType="int">
+		SELECT COUNT(*) AS COUNT 
+		FROM REVIEW
+		WHERE AP_ID = #{ap_id}
+	</select>
 </mapper>

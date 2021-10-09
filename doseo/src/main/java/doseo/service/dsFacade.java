@@ -65,6 +65,10 @@ public interface dsFacade {
 	double getAVGRate(String hos_id); //추가
 	
 	Review getReviewDetailById(String hos_id, String review_id);//0925
+	
+	void insertReview(Review review);//1002추가
+	
+	public int reviewExistCheck(String ap_id);
 
 	// hospital search
 	List<Hospital> getHospitalList(String country, String city, String district);

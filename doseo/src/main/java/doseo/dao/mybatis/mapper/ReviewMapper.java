@@ -19,4 +19,8 @@ public interface ReviewMapper {
 	double getAVGRate(String hos_id);
 	
 	Review getReviewDetailById(@Param("hos_id") String hos_id, @Param("review_id") String review_id);
+
+	void insertReview(Review review);
+	
+	public int reviewExistCheck(String ap_id);
 }
