@@ -359,33 +359,15 @@ body {
 					-HOSPITAL	<br>		 ${ap.hos_name_eng}<br>
 					-DEPARTMENT	<br>		 ${ap.dept_name_eng}<br>
 					-SELECETED LANGUAGE	<br> ${ap.select_language}<br>
-					-REQUEST DETAILS <br>${ap.message}<br>
 					</p>
 				</div>
-				
-				<!-- 방문이 된 경우 + 작성이 된 경우 -->
-				<c:if test="${ap.visited eq '1'}">
-					<c:if test="${reviewExistCheck eq '0'}"><!-- 방문은 했으나 리뷰가 없는 경우->리뷰 작성 페이지로 이동 -->
-						<div class="sidebar-widget tags mb-3">
-						<a href="<c:url value='register_review_form'>
-										<c:param name='ap_id' value='${ap.ap_id}'/></c:url>">
-							Write a Review</a>
-						</div>
-					</c:if>
-					<c:if test="${reviewExistCheck eq '1'}"><!-- 방문을 했고, 리뷰도 작성한 경우->마이페이지의 리뷰리스트 페이지로 이동-->
-						<div class="sidebar-widget tags mb-3">
-						<a href="<c:url value='review_list'/>">
-							Review List</a>
-						</div>
-					</c:if>
-				</c:if>
 				
 				<c:if test="${ap.canBeDeleted eq 'true'}">
 				<div class="sidebar-widget tags mb-3">
 					<a href="<c:url value='appointment_delete'>
 									<c:param name='ap_id' value='${ap.ap_id}'/></c:url>"
 						onClick="if(!confirm('Are you sure you want to cancle the reservation?')){return false;}">
-						cancel</a>
+						cancle</a>
 				</div>
 				</c:if>
 			</div>

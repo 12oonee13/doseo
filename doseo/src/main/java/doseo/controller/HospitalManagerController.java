@@ -202,8 +202,6 @@ public class HospitalManagerController {
 		List<Review> revlist = ds.getReviewByHosId(hos_id);
 		int total = revlist.size();
 		double rating = ds.getAVGRate(hos_id);
-		//null 인경우 생각하기
-			
 		
 		model.addAttribute("revlist", revlist);
 		model.addAttribute("total", total);

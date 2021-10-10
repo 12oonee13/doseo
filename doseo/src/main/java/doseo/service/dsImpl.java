@@ -142,6 +142,7 @@ public class dsImpl implements dsFacade {
 		return reviewDao.getReviewDetailById(hos_id, review_id);
 	}
 	
+<<<<<<< HEAD
 	public void insertReview(Review review) {
 		reviewDao.insertReview(review);
 	}
@@ -159,6 +160,8 @@ public class dsImpl implements dsFacade {
 	}
 	
 	
+=======
+>>>>>>> parent of 09939f4 (Merge pull request #1 from 12oonee13/seo)
 	//hospital search
 	public List<Hospital> getHospitalList(String country, String city, String district){
 		return hospitalDao.getHospitalList(country, city, district);

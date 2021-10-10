@@ -12,13 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+=======
+>>>>>>> parent of 09939f4 (Merge pull request #1 from 12oonee13/seo)
 
-import doseo.command.ReviewCommand;
-import doseo.model.Appointment;
 import doseo.model.Member;
 import doseo.model.Pharmacy;
 import doseo.model.Review;
@@ -65,6 +66,7 @@ public class ReviewController {
 		return "redirect:review_list";
 	}
 	
+<<<<<<< HEAD
 	//0926 리뷰 입력 폼으로 이동
 	@RequestMapping("/member/register_review_form")
 	public String registerReview(@RequestParam("ap_id")String ap_id, Model model) {
@@ -151,4 +153,6 @@ public class ReviewController {
 			
 	
 	}
+=======
+>>>>>>> parent of 09939f4 (Merge pull request #1 from 12oonee13/seo)
 }

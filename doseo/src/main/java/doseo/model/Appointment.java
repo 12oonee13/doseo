@@ -29,13 +29,11 @@ public class Appointment implements Serializable{
 	private String p_gender;
 	private String p_age;
 	private String p_nationality;
-
-	private String visited;
 	
 	public Appointment() {}
 	
 	public Appointment(String ap_id, String ap_date, String time, String select_language, String hos_name_eng,
-			String dept_name_eng, String visited, String message, String dept_id) {
+			String dept_name_eng) {
 		super();
 		this.ap_id = ap_id;
 		this.ap_date = ap_date;
@@ -43,9 +41,6 @@ public class Appointment implements Serializable{
 		this.select_language = select_language;
 		this.hos_name_eng = hos_name_eng;
 		this.dept_name_eng = dept_name_eng;
-		this.visited = visited;
-		this.message = message;
-		this.dept_id = dept_id;
 	}
 	
 	public Appointment(java.sql.Date date, String time, String select_language, String id, String hos_id,
@@ -239,13 +234,4 @@ public class Appointment implements Serializable{
 	public void setP_nationality(String p_nationality) {
 		this.p_nationality = p_nationality;
 	}
-	
-	public String getVisited() {
-		return visited;
-	}
-
-	public void setVisited(String visited) {
-		this.visited = visited;
-	}
-	
 }

@@ -19,6 +19,7 @@ public interface ReviewMapper {
 	double getAVGRate(String hos_id);
 	
 	Review getReviewDetailById(@Param("hos_id") String hos_id, @Param("review_id") String review_id);
+<<<<<<< HEAD
 
 	void insertReview(Review review);
 	
@@ -28,4 +29,6 @@ public interface ReviewMapper {
 	
 	List<Review> getAllReviewByHosId(String hos_id);
 	
+=======
+>>>>>>> parent of 09939f4 (Merge pull request #1 from 12oonee13/seo)
 }
