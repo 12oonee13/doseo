@@ -203,10 +203,8 @@ public class DoctorController {
 	
 	@GetMapping("doctor/doctor_appointment")
 	public String appointment(HttpServletRequest request, Model model) {
-		String doc_id = ((Doctor)request.getSession().getAttribute("sessionForUser")).getDoc_id();
 		List<Appointment> app_list = new ArrayList<>();
-		
-		app_list = ds.get_doctor_appList(doc_id);
+		app_list = ds.get_doctor_appList(((Doctor)request.getSession().getAttribute("sessionForUser")).getDoc_id());
 		
 		model.addAttribute("app_list",app_list);
 		
@@ -241,18 +239,5 @@ public class DoctorController {
 		model.addAttribute("docTime", hashmap);//해당 의사가 가지고 있는 시간표
 		
 		return "hospital/docoutput";
-	}
-	
-	@PostMapping("/doctor/check_visit")
-	public String check_visit(HttpServletRequest request, HttpSession session,
-			@RequestParam(value = "visited") List<String> ap_id, Model model) {
-		
-		Iterator<String> it_apId = ap_id.iterator();
-		
-		while (it_apId.hasNext()) {
-			ds.checkVisited((String)(it_apId.next()));
-		}
-		
-		return "redirect:/doctor/doctor_appointment";
 	}
 }

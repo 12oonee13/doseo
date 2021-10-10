@@ -47,5 +47,12 @@ public class MybatisReviewDao implements ReviewDao{
 	public int reviewExistCheck(String ap_id) throws DataAccessException{
 		return reviewMapper.reviewExistCheck(ap_id);
 	}
-
+	
+	public List<Review> getAllReview() throws DataAccessException{
+		return reviewMapper.getAllReview();
+	}
+	
+	public List<Review> getAllReviewByHosId(String hos_id) throws DataAccessException{
+		return reviewMapper.getReviewByHosId(hos_id);
+	}
 }
