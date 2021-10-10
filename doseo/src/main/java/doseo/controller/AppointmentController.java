@@ -85,6 +85,10 @@ public class AppointmentController {
 			ap.setCanBeDeleted("true");
 
 		model.addAttribute("ap", ap);
+		
+		//1002 서연 추가 리뷰가 이미 존재하는지 여부
+		int reviewExistCheck = ds.reviewExistCheck(request.getParameter("ap_id"));// 1이면 존재 0이면 없음
+		model.addAttribute("reviewExistCheck", reviewExistCheck);
 
 		return "member/appointment_list_detail";
 	}
@@ -222,16 +226,19 @@ public class AppointmentController {
 	}
 	
 	//닥터 스케줄 - 이미 예약된 것에 대한 시간 test
-	@RequestMapping("/member/timelistTest")
-	public String test(@RequestParam("selectedDate") String date,
-			  @RequestParam("doc_id") String doc_id,
-			  @RequestParam("selectedDay") String day, Model model) {
-		
-		List<String> timelist = this.ds.getAvaliableTimeList(doc_id, day, date);
-		model.addAttribute("timelist", timelist);
-		
-		return "member/testoutput";
-	}
+	/*
+	 * @RequestMapping("/member/timelistTest") public String
+	 * test(@RequestParam("selectedDate") String date,
+	 * 
+	 * @RequestParam("doc_id") String doc_id,
+	 * 
+	 * @RequestParam("selectedDay") String day, Model model) {
+	 * 
+	 * List<String> timelist = this.ds.getAvaliableTimeList(doc_id, day, date);
+	 * model.addAttribute("timelist", timelist);
+	 * 
+	 * return "member/testoutput"; }
+	 */
 	
 	//서연 0804
 	//Ajax방식으로 json데이터를 만들어서 다시 view로 넘겨주는 메소드

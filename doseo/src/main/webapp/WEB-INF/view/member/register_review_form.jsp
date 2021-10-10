@@ -265,6 +265,27 @@ body {
 <!-- Main Stylesheet -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
+	
+<script>
+	 function reviewCreate() {
+		if (RegisterForm.detail.value == "") {
+			alert("Please write your content!");
+			RegisterForm.detail.focus();
+			return false;
+		}
+		/*
+		if (RegisterForm.creationDate.value == "") {
+			alert("Please write your Register Date! (YY/MM/DD)");
+			RegisterForm.creationDate.focus();
+			return false;
+		}
+		if (RegisterForm.isWritten.value != "") {
+			alert("There is a same number of review!");
+			return false;
+		}
+		RegisterForm.submit();
+	} 
+</script>
 
 </head>
 
@@ -327,8 +348,7 @@ body {
 			</div>
 		</nav>
 	</header>
-
-
+	
 	<section class="section testimonial-2 gray-bg">
 		<div class="row justify-content-center">
 			<div class="col-lg-7">
@@ -341,59 +361,87 @@ body {
 							id="mypage_category">Review </a></label>
 					</div>
 					<hr>
-					<h2>Appointment</h2>
+					<h2>Write a Review</h2>
 					<div class="divider mx-auto my-4"></div>
-					<p>check your appointment</p>
+					<p>please write a review of your appointment</p>
 				</div>
 			</div>
 		</div>
-
-		<div class="container">
-			<div class="row align-items-center">
-				<div class="col-lg-12 testimonial-wrap-2">
-					<span class="text-black text-capitalize mr-3">appointment
-						detail: <br>
-					<i class="icofont-calendar mr-2"></i> ${ap.ap_date}  ${ap.ap_time}
-					</span><p>
-					<br>
-					-HOSPITAL	<br>		 ${ap.hos_name_eng}<br>
-					-DEPARTMENT	<br>		 ${ap.dept_name_eng}<br>
-					-SELECETED LANGUAGE	<br> ${ap.select_language}<br>
-					-REQUEST DETAILS <br>${ap.message}<br>
-					</p>
-				</div>
-				
-				<!-- 방문이 된 경우 + 작성이 된 경우 -->
-				<c:if test="${ap.visited eq '1'}">
-					<c:if test="${reviewExistCheck eq '0'}"><!-- 방문은 했으나 리뷰가 없는 경우->리뷰 작성 페이지로 이동 -->
-						<div class="sidebar-widget tags mb-3">
-						<a href="<c:url value='register_review_form'>
-										<c:param name='ap_id' value='${ap.ap_id}'/></c:url>">
-							Write a Review</a>
+	<div class="container">
+		<div class="row align-items-center">
+		<div class="col-lg-12 testimonial-wrap-2">
+		 <form name="RegisterForm" id= "RegisterForm" action="<c:url value='/member/review_confirm'>
+		 					<c:param name='ap_id' value='${ap.ap_id}'/></c:url>" method="post">
+			
+				<%-- <div class="row">
+					<div class="col-lg-6">
+						<div class="form-group"><b>Appointment ID</b> : ${ap.ap_id}</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="form-group"><b>Review of </b>${ap.hos_name_eng}</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="form-group"><b>Message</b>${ap.message}</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="form-group">
+						<b>Rating</b>
+						<select class="form-control"name="rate" required="required">
+							<option value="1">★☆☆☆☆</option>
+							<option value="2">★★☆☆☆</option>
+							<option value="3">★★★☆☆</option>
+							<option value="4">★★★★☆</option>
+							<option value="5">★★★★★</option>
+						</select>
 						</div>
-					</c:if>
-					<c:if test="${reviewExistCheck eq '1'}"><!-- 방문을 했고, 리뷰도 작성한 경우->마이페이지의 리뷰리스트 페이지로 이동-->
-						<div class="sidebar-widget tags mb-3">
-						<a href="<c:url value='review_list'/>">
-							Review List</a>
-						</div>
-					</c:if>
-				</c:if>
-				
-				<c:if test="${ap.canBeDeleted eq 'true'}">
-				<div class="sidebar-widget tags mb-3">
-					<a href="<c:url value='appointment_delete'>
-									<c:param name='ap_id' value='${ap.ap_id}'/></c:url>"
-						onClick="if(!confirm('Are you sure you want to cancle the reservation?')){return false;}">
-						cancel</a>
-				</div>
-				</c:if>
-			</div>
-		</div>
-
+					</div>
+					<div class="form-group-2 mb-4">
+							<textarea name="message" id="message" class="form-control"
+									rows="6" placeholder="Comment"></textarea>
+					</div>
+				</div> --%>
+		<table>
+				<tbody>
+					<tr>
+						<td><b>Appointment ID</b></td>
+						<td>${ap.ap_id}</td>
+						<td><b>Review of </b>${ap.hos_name_eng}</td>
+						<td><b>Rating</b>
+						<select id="rate" name="rate"  class="form-control" required="required">
+							<option value="1">★☆☆☆☆</option>
+							<option value="2">★★☆☆☆</option>
+							<option value="3">★★★☆☆</option>
+							<option value="4">★★★★☆</option>
+							<option value="5">★★★★★</option>
+						</select>
+					</td>
+					</tr>
+					<tr>
+						<td colspan="2"><b>Message</b></td>
+						<td>${ap.message}</td><!-- 할것,,, -->
+					</tr>
+					<tr>
+						<td rowspan="4"><b>Comment</b></td>
+						<td colspan="2" rowspan="4"><textarea name="detail"
+								id="detail" rows="5" cols="80" required="required"></textarea></td>
+						<td><b>Language </b>${ap.select_language}</td>
+					</tr>
+					<tr>
+						<td><b>Visited Date </b>${ap.ap_date}</td>
+					</tr>
+					<tr>
+						<td><b>User ID </b>${sessionForUser.id} </td>
+					</tr>
+				</tbody>
+			</table> 
+			<hr />
+			<input type="submit" class="btn btn-main-2 btn-round-full mt-3"
+				value="Register" onClick="reviewCreate()" />
+		</form> 
+	</div>
+	</div>
+	</div>
 	</section>
-	
-
 
 	<!-- footer Start -->
 	<footer class="footer section gray-bg">

@@ -23,9 +23,17 @@ public class Review implements Serializable{
 	private String dept_name_eng;
 	private String doc_name;
 
-	
 	public Review() {}
-
+	
+	//리뷰 등록 시 사용
+	public Review(String detail, String ap_id, String user_id, String rate) {
+		super();
+		this.detail = detail;
+		this.ap_id = ap_id;
+		this.user_id = user_id;
+		this.rate = rate;
+	}
+	
 	public Review(String review_id, String detail, String rate, String user_id, String ap_date) { //0925 서연 추가 
 		super();
 		this.review_id = review_id;
@@ -45,21 +53,6 @@ public class Review implements Serializable{
 		this.ap_date = ap_date;
 	}
 	
-	//리뷰 메인 페이지에 리뷰리스트 띄울떄 사용
-	public Review(String hos_name_eng, String user_id, String review_id, String detail, String ap_id, String rate,
-			String dept_name_eng, String ap_date) {
-		super();
-		this.hos_name_eng = hos_name_eng;
-		this.user_id = user_id;
-		this.review_id = review_id;
-		this.detail = detail;
-		this.ap_id = ap_id;
-		this.rate = rate;
-		this.dept_name_eng = dept_name_eng;
-		this.ap_date = ap_date;
-		
-	}
-
 	//0922추가
 	//<!-- 해당 병원의 전체 REVIEW -->
 	//<select id="getReviewByHosId" resultType="Review">

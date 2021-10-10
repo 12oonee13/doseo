@@ -4,6 +4,7 @@ package doseo.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -142,7 +143,6 @@ public class dsImpl implements dsFacade {
 		return reviewDao.getReviewDetailById(hos_id, review_id);
 	}
 	
-<<<<<<< HEAD
 	public void insertReview(Review review) {
 		reviewDao.insertReview(review);
 	}
@@ -151,17 +151,6 @@ public class dsImpl implements dsFacade {
 		return reviewDao.reviewExistCheck(ap_id);
 	}
 	
-	public List<Review> getAllReview(){
-		return reviewDao.getAllReview();
-	}
-	
-	public List<Review> getAllReviewByHosId(String hos_id){
-		return reviewDao.getAllReviewByHosId(hos_id);
-	}
-	
-	
-=======
->>>>>>> parent of 09939f4 (Merge pull request #1 from 12oonee13/seo)
 	//hospital search
 	public List<Hospital> getHospitalList(String country, String city, String district){
 		return hospitalDao.getHospitalList(country, city, district);
@@ -214,6 +203,10 @@ public class dsImpl implements dsFacade {
 	public int countMonthlyFemale(String doc_id) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	public void checkVisited(String ap_id) {
+		appointmentDao.checkVisited(ap_id);
 	}
 	
 	//pharmacy

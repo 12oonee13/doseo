@@ -2,6 +2,8 @@ package doseo.service;
 
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
+
 import doseo.model.Appointment;
 import doseo.model.Doctor;
 import doseo.model.ForCount;
@@ -40,6 +42,7 @@ public interface dsFacade {
 	
 	List<Doctor> getDocTimeList(String doc_id);
 	
+	
 	// member
 	Member getMember(String id);
 
@@ -65,17 +68,10 @@ public interface dsFacade {
 	double getAVGRate(String hos_id); //추가
 	
 	Review getReviewDetailById(String hos_id, String review_id);//0925
-<<<<<<< HEAD
 	
 	void insertReview(Review review);//1002추가
 	
-	int reviewExistCheck(String ap_id);
-	
-	List<Review> getAllReview();
-	
-	List<Review> getAllReviewByHosId(String hos_id);
-=======
->>>>>>> parent of 09939f4 (Merge pull request #1 from 12oonee13/seo)
+	public int reviewExistCheck(String ap_id);
 
 	// hospital search
 	List<Hospital> getHospitalList(String country, String city, String district);
@@ -102,6 +98,8 @@ public interface dsFacade {
 	void insertAppointment(Appointment appointment);// 서연
 
 	List<String> getAvaliableTimeList(String doc_id, String day, String date);//서연
+	
+	void checkVisited(String ap_id);
 	
 	//pharmacy
 	List<Pharmacy> getPharmList(String district);

@@ -73,4 +73,7 @@
 		FROM DEPARTMENT
 		WHERE DEPT_NAME_ENG=#{deptName}
 	</select>
+	
+	
+	
 </mapper>

@@ -39,7 +39,6 @@ public class MybatisReviewDao implements ReviewDao{
 	public Review getReviewDetailById(String hos_id, String review_id) throws DataAccessException{
 		return reviewMapper.getReviewDetailById(hos_id, review_id);
 	}
-<<<<<<< HEAD
 	
 	public void insertReview(Review review) throws DataAccessException{
 		reviewMapper.insertReview(review);
@@ -48,14 +47,5 @@ public class MybatisReviewDao implements ReviewDao{
 	public int reviewExistCheck(String ap_id) throws DataAccessException{
 		return reviewMapper.reviewExistCheck(ap_id);
 	}
-	
-	public List<Review> getAllReview() throws DataAccessException{
-		return reviewMapper.getAllReview();
-	}
-	
-	public List<Review> getAllReviewByHosId(String hos_id) throws DataAccessException{
-		return reviewMapper.getReviewByHosId(hos_id);
-	}
-=======
->>>>>>> parent of 09939f4 (Merge pull request #1 from 12oonee13/seo)
+
 }

@@ -173,7 +173,14 @@
                         		<b>Register a new Doctor</b><br><br>
                         		 <form id="frm" name="frm" method="post" action="<c:url value='/hospital/doctor_register'>
 	                                            				<c:param name='deptName' value='${deptName}'/>
-	                                            				<c:param name='doc_login_id' value='${rand_id}'/></c:url>"> 
+	                                            				<c:choose>
+	                                            					<c:when test="${rand_id == null}">
+	                                            						<c:param name='doc_login_id' value='${new_rand_id}'/>
+	                                            					</c:when>
+	                                            					<c:when test="${new_rand_id == null}">
+	                                            						<c:param name='doc_login_id' value='${rand_id}'/>
+	                                            					</c:when>
+	                                            				</c:choose></c:url>"> 
 	                                Login ID : ${rand_id} ${new_rand_id}<br>
 	                                Department : ${deptName}<br>
 	                                Name : <input type="text" name="doc_name" id="doc_name" placeholder="대문자 영문 이름"><br>

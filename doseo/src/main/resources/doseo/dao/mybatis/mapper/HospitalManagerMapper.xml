@@ -60,4 +60,21 @@
 		INSERT INTO DOCTOR 
 		VALUES(DOC_SEQ.NEXTVAL, #{doc_name}, #{doc_login_id}, #{doc_pwd}, #{dept_id}, #{hos_id}, #{speciality})
 	</insert> 
+	
+	<!-- 병원의 누적 예약 수
+	<select>
+		SELECT COUNT(*) AS TOTAL
+		FROM APPOINTMENT
+		WHERE HOS_ID = #{hos_id}
+	</select>
+	 -->
+	
+	<!-- 통계 : 병원의 이용자별 누적 예약 수-->
+	<!-- select id="">
+		SELECT USER_ID, COUNT(*)
+		FROM APPOINTMENT
+		WHERE HOS_ID = #{hos_id}
+		GROUP BY USER_ID
+	</select>
+	-->
 </mapper>

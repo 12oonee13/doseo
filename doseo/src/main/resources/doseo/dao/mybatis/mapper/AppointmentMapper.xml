@@ -13,11 +13,12 @@
 	
 	<select id="getAppointment" resultType="Appointment">
 		SELECT A.AP_ID, TO_CHAR(A.AP_DATE, 'yyyy-mm-dd')AS AP_DATE, TO_CHAR(A.AP_TIME, 'HH24:MI')AS AP_TIME, A.SELECT_LANGUAGE, H.HOS_NAME_ENG,
-		D.DEPT_NAME_ENG
+		D.DEPT_NAME_ENG, A.VISITED, A.MESSAGE, D.DEPT_ID
 		FROM APPOINTMENT A, DEPARTMENT D, HOSPITAL H
 		WHERE A.AP_ID = #{ap_id} AND A.DEPT_ID = D.DEPT_ID AND A.HOS_ID = H.HOS_ID
 	</select>
-	
+	<!-- 여기서 DEPT_ID는 MODEL애서 생성자 변수 개수로 그냥 넣은거,,,,1002 -->
+		
 	<delete id = "deleteAppointment">
 		DELETE FROM APPOINTMENT 
 		WHERE AP_ID = #{ap_id}
@@ -63,6 +64,12 @@
 		FROM APPOINTMENT
 		WHERE DOC_ID=#{doc_id} AND AP_DATE=#{date}
 	</select>
+	
+	<update id ="checkVisited" parameterType="java.lang.String">
+		UPDATE APPOINTMENT
+		SET VISITED = '1'
+		WHERE AP_ID = #{ap_id}
+	</update>
 	
 <!-- 21/07/15 11:10 to_timestamp('#{time}','YY/MM/DD HH24:MI')-->
 </mapper>

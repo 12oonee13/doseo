@@ -56,7 +56,6 @@
 		FROM REVIEW R, APPOINTMENT A, DEPARTMENT DE, DOCTOR DO
 		WHERE R.AP_ID = A.AP_ID AND A.DEPT_ID = DE.DEPT_ID AND A.DOC_ID = DO.DOC_ID AND A.HOS_ID =#{hos_id} AND R.REVIEW_ID=#{review_id}
 	</select>
-<<<<<<< HEAD
 	
 	<!-- 리뷰 등록 -->
 	<insert id="insertReview" parameterType="Review">
@@ -70,19 +69,4 @@
 		FROM REVIEW
 		WHERE AP_ID = #{ap_id}
 	</select>
-	
-	<!-- 리뷰 메인페이지의 리뷰 리스트 불러오기 : 전체 -->
-	<select id="getAllReview" resultType="Review">
-		SELECT H.HOS_NAME_ENG, R.USER_ID, R.REVIEW_ID, R.DETAIL, R.AP_ID, R.RATE, D.DEPT_NAME_ENG, TO_CHAR(A.AP_DATE, 'yyyy-mm-dd') AS AP_DATE
-		FROM APPOINTMENT A, REVIEW R, HOSPITAL H, DEPARTMENT D
-		WHERE R.AP_ID = A.AP_ID AND A.HOS_ID = H.HOS_ID AND A.DEPT_ID = D.DEPT_ID
-	</select> 
-	<!-- 뷰 메인페이지의 리뷰 리스트 불러오기 : 특정 병원 -->
-	<select id="getAllReviewByHosId" resultType="Review">
-		SELECT H.HOS_NAME_ENG, R.USER_ID, R.REVIEW_ID, R.DETAIL, R.AP_ID, R.RATE, D.DEPT_NAME_ENG, TO_CHAR(A.AP_DATE, 'yyyy-mm-dd') AS AP_DATE
-		FROM APPOINTMENT A, REVIEW R, HOSPITAL H, DEPARTMENT D
-		WHERE R.AP_ID = A.AP_ID AND A.HOS_ID = H.HOS_ID AND A.DEPT_ID = D.DEPT_ID AND A.HOS_ID=#{hos_id}
-	</select> 
-=======
->>>>>>> parent of 09939f4 (Merge pull request #1 from 12oonee13/seo)
 </mapper>
