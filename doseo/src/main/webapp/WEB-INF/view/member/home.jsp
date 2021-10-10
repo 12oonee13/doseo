@@ -431,6 +431,7 @@ body {
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="feature-block d-lg-flex">
+							
 							<div class="feature-item mb-5 mb-lg-0">
 								<div class="feature-icon mb-4">
 									<img width="50" height="50"
@@ -444,6 +445,7 @@ body {
 								<a href="<c:url value='/hospital/searchDept'/>"
 									class="btn btn-main btn-round-full">Make an appointment</a>
 							</div>
+							
 							<div class="feature-item mb-5 mb-lg-0">
 								<div class="feature-icon mb-4">
 									<img width="50" height="50"
@@ -458,16 +460,20 @@ body {
 									class="btn btn-main btn-round-full">Search</a>
 							</div>
 
-						<div class="feature-item mb-5 mb-lg-0">
-							<div class="feature-icon mb-4">
-								<i class="icofont-support"></i>
+							<div class="feature-item mb-5 mb-lg-0">
+								<div class="feature-icon mb-4">
+									<img width="50" height="50"
+										src="${pageContext.request.contextPath}/resources/images/review_icon.png">
+									
+								</div>
+								<span>Emegency Cases</span>
+								<h4 class="mb-3">Review</h4>
+								<p>Get ALl time support for emergency.We have introduced the
+									principle of family medicine.Get Conneted with us for any
+									urgency .</p>
+								<a href="<c:url value='/review/review_main'/>"
+									class="btn btn-main btn-round-full">Reviews</a>
 							</div>
-							<span>Emegency Cases</span>
-							<h4 class="mb-3">1-800-700-6200</h4>
-							<p>Get ALl time support for emergency.We have introduced the
-								principle of family medicine.Get Conneted with us for any
-								urgency .</p>
-						</div>
 					</div>
 				</div>
 			</div>
