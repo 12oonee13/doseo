@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="doseo.dao.mybatis.mapper.PharmacyMapper">
+	<cache />
+	<!-- district -->
+	<select id="getPharmList" resultType="Pharmacy">
+		SELECT 	
+			P.PHAR_ID AS ID, 
+			PHAR_NAME_KOR AS NAME_KOR, 
+			PHAR_NAME_ENG AS NAME_ENG, 
+			DETAIL, 
+			TEL, 
+			LISTAGG(LANGUAGE, ',') WITHIN GROUP (ORDER BY LANGUAGE) AS LANGUAGE
+		FROM PHARMACY P, pharm_language L
+		WHERE P.PHAR_ID=L.PHAR_ID AND PHARM_DISTRICT= #{district}
+        GROUP BY PHAR_NAME_ENG, P.PHAR_ID, PHAR_NAME_KOR, DETAIL, TEL
+	</select>
+	<!--  district and language -->
+	<select id='getPharmList2' resultType='Pharmacy'>
+		SELECT 
+			P.PHAR_ID AS ID, 
+			PHAR_NAME_KOR AS NAME_KOR, 
+			PHAR_NAME_ENG AS NAME_ENG, 
+			TEL, 
+			DETAIL
+		FROM PHARMACY P, PHARM_LANGUAGE L
+		WHERE P.PHAR_ID = L.PHAR_ID AND PHARM_DISTRICT = #{district} AND LANGUAGE = #{language} 
+	</select>
+</mapper>

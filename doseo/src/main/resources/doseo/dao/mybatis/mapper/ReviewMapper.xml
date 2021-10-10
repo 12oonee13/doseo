@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="doseo.dao.mybatis.mapper.ReviewMapper">
+	<cache />
+	<select id="getReview_list" resultType="Review">
+		SELECT R.REVIEW_ID, R.DETAIL, R.RATE, A.AP_ID, H.HOS_NAME_ENG, TO_CHAR(A.AP_DATE, 'yyyy-mm-dd') AS AP_DATE
+		FROM REVIEW R, APPOINTMENT A, HOSPITAL H
+		WHERE R.USER_ID = #{id} AND R.AP_ID = A.AP_ID AND A.HOS_ID = H.HOS_ID
+	</select>
+
+	<select id="getReview" resultType="Review">
+		SELECT R.REVIEW_ID, R.DETAIL, R.RATE, A.AP_ID, H.HOS_NAME_ENG, TO_CHAR(A.AP_DATE, 'yyyy-mm-dd') AS AP_DATE
+		FROM REVIEW R, APPOINTMENT A, HOSPITAL H
+		WHERE R.REVIEW_ID = #{review_id} AND R.AP_ID = A.AP_ID AND A.HOS_ID = H.HOS_ID
+	</select>
+	
+	<delete id = "deleteReview">
+		DELETE FROM REVIEW 
+		WHERE REVIEW_ID = #{review_id}
+	</delete>
+	
+	<!-- 해당 병원의 전체 REVIEW -->
+	<select id="getReviewByHosId" resultType="Review">
+		SELECT 
+			R.REVIEW_ID AS REVIEW_ID, 
+			R.DETAIL AS DETAIL,
+			R.RATE AS RATE, 
+			A.USER_ID AS USER_ID, 
+			TO_CHAR(A.AP_DATE, 'yyyy-mm-dd') AS AP_DATE
+		FROM REVIEW R, APPOINTMENT A 
+		WHERE R.AP_ID = A.AP_ID AND A.HOS_ID = #{hos_id}
+	</select>
+	
+	<!-- 평점 출력 : 소수점 둘째자리수까지만-->
+	<select id="getAVGRate" resultType="Double">
+		SELECT ROUND(AVG(RATE), 2)
+		FROM REVIEW R, APPOINTMENT A
+		WHERE A.AP_ID = R.AP_ID AND A.HOS_ID = #{hos_id}
+	</select>
+	
+	<!-- 리뷰 상세 -->
+	<select id="getReviewDetailById" resultType="Review">
+		SELECT 
+			R.REVIEW_ID AS REVIEW_ID, 
+			R.USER_ID AS USER_ID, 
+			R.RATE AS RATE,
+			A.AP_ID AS AP_ID,
+			TO_CHAR(A.AP_TIME, 'YYYY-MM-DD HH24:MI') AS AP_TIME,
+			SELECT_LANGUAGE, 
+			DETAIL,
+			MESSAGE, 
+			DE.DEPT_NAME_ENG AS DEPT_NAME_ENG, 
+			DO.DOC_NAME AS DOC_NAME,
+			DO.DOC_ID AS DOC_ID
+		FROM REVIEW R, APPOINTMENT A, DEPARTMENT DE, DOCTOR DO
+		WHERE R.AP_ID = A.AP_ID AND A.DEPT_ID = DE.DEPT_ID AND A.DOC_ID = DO.DOC_ID AND A.HOS_ID =#{hos_id} AND R.REVIEW_ID=#{review_id}
+	</select>
+	
+	<!-- 리뷰 등록 -->
+	<insert id="insertReview" parameterType="Review">
+		INSERT INTO REVIEW
+		VALUES('REV'||REV_SEQ.NEXTVAL, #{detail}, #{ap_id}, #{user_id}, #{rate})
+	</insert>
+	
+	<!-- 리뷰가 이미 존재하는지 체크(이미 존재하면 리뷰 작성이 불가능) -->
+	<select id="reviewExistCheck" resultType="int">
+		SELECT COUNT(*) AS COUNT 
+		FROM REVIEW
+		WHERE AP_ID = #{ap_id}
+	</select>
+</mapper>
