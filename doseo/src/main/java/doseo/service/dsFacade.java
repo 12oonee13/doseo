@@ -2,6 +2,8 @@ package doseo.service;
 
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
+
 import doseo.model.Appointment;
 import doseo.model.Doctor;
 import doseo.model.ForCount;
@@ -39,6 +41,7 @@ public interface dsFacade {
 	List<Doctor> getDoctorList(String dept_id);
 	
 	List<Doctor> getDocTimeList(String doc_id);
+	
 	
 	// member
 	Member getMember(String id);
@@ -95,6 +98,8 @@ public interface dsFacade {
 	void insertAppointment(Appointment appointment);// 서연
 
 	List<String> getAvaliableTimeList(String doc_id, String day, String date);//서연
+	
+	void checkVisited(String ap_id);
 	
 	//pharmacy
 	List<Pharmacy> getPharmList(String district);
