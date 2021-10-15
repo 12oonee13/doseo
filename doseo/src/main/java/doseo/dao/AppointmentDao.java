@@ -17,6 +17,6 @@ public interface AppointmentDao {
 	void insertAppointment(Appointment appointment) throws DataAccessException;
 	
 	List<String> getAvaliableTimeList(String doc_id, String day, String date) throws DataAccessException;
-	
+
 	void checkVisited(String ap_id) throws DataAccessException;
 }

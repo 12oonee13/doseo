@@ -4,7 +4,6 @@ package doseo.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -150,6 +149,11 @@ public class dsImpl implements dsFacade {
 	public int reviewExistCheck(String ap_id) {
 		return reviewDao.reviewExistCheck(ap_id);
 	}
+	
+	public List<Review> getAllReview(){
+		return reviewDao.getAllReview();
+	}
+	
 	
 	//hospital search
 	public List<Hospital> getHospitalList(String country, String city, String district){

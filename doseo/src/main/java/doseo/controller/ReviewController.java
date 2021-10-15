@@ -90,4 +90,38 @@ public class ReviewController {
 		return "member/mypage";
 	
 	}	
+	
+	/*
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping(value="/review/ajax_getReviewlist", method=RequestMethod.GET)
+	 * public void revAjaxView(HttpServletRequest request, HttpServletResponse
+	 * response,
+	 * 
+	 * @RequestParam("hos_id") String hos_id) throws Exception{ JSONArray jArray =
+	 * new JSONArray();//JSONArray객체생성 ArrayList<Review> list = null; //전체 병원에 대한 경우
+	 * + 특정 병원에 대한 경우로 나눠서 if(hos_id.equals("All")) { list =
+	 * (ArrayList<Review>)ds.getAllReview(); System.out.println("list size1" +
+	 * list.size()); if (list.size() == 0) {//해당 결과가 없는 경우 try {
+	 * response.getWriter().print("null"); //response.getWriter로 프린트 해주면 통신 성공 }
+	 * catch (Exception e) { e.printStackTrace(); } } } else {//특정 병원을 선택한 경우 list =
+	 * (ArrayList<Review>)ds.getAllReviewByHosId(hos_id);
+	 * System.out.println("list size2" + list.size()); if (list.size() == 0) {//해당
+	 * 결과가 없는 경우 try { response.getWriter().print("null"); //response.getWriter로 프린트
+	 * 해주면 통신 성공 } catch (Exception e) { e.printStackTrace(); } } } //json형식으로 리스트의
+	 * 내용을 옮기기 for (int i = 0; i < list.size(); i++) {
+	 * System.out.println(list.get(i).getAp_id()); JSONObject jo = new
+	 * JSONObject();//JSON객체생성 jo.put("hos_name_eng",
+	 * list.get(i).getHos_name_eng()); jo.put("user_id", list.get(i).getUser_id());
+	 * jo.put("review_id", list.get(i).getReview_id()); jo.put("detail",
+	 * list.get(i).getDetail()); jo.put("ap_id", list.get(i).getAp_id());
+	 * jo.put("rate", list.get(i).getRate()); jo.put("dept_name_eng",
+	 * list.get(i).getDept_name_eng()); jo.put("ap_date", list.get(i).getAp_date());
+	 * jArray.add(jo); } try { response.getWriter().print(jArray);
+	 * //response.getWriter로 프린트 해주면 통신 성공 } catch (Exception e) {
+	 * e.printStackTrace(); }
+	 * 
+	 * 
+	 * }
+	 */
 }

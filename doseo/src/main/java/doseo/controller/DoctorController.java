@@ -242,17 +242,17 @@ public class DoctorController {
 		
 		return "hospital/docoutput";
 	}
-	
+
 	@PostMapping("/doctor/check_visit")
 	public String check_visit(HttpServletRequest request, HttpSession session,
 			@RequestParam(value = "visited") List<String> ap_id, Model model) {
-		
+
 		Iterator<String> it_apId = ap_id.iterator();
-		
+
 		while (it_apId.hasNext()) {
 			ds.checkVisited((String)(it_apId.next()));
 		}
-		
+
 		return "redirect:/doctor/doctor_appointment";
 	}
 }

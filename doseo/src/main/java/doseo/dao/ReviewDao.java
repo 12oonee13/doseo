@@ -20,5 +20,7 @@ public interface ReviewDao {
 	
 	void insertReview(Review review);
 	
-	public int reviewExistCheck(String ap_id);
+	int reviewExistCheck(String ap_id);
+	
+	List<Review> getAllReview();
 }

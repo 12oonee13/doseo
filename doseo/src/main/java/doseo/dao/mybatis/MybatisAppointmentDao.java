@@ -33,7 +33,7 @@ public class MybatisAppointmentDao implements AppointmentDao{
 	public List<String> getAvaliableTimeList(String doc_id, String day, String date) throws DataAccessException{
 		return appointmentMapper.getAvaliableTimeList(doc_id, day, date);
 	}
-	
+
 	public void checkVisited(String ap_id) throws DataAccessException{
 		appointmentMapper.checkVisited(ap_id);
 	}
