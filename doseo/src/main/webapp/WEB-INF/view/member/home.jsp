@@ -418,7 +418,7 @@ body {
 						<div class="btn-container ">
 							<a href="appoinment.html" target="_blank"
 								class="btn btn-main-2 btn-icon btn-round-full">Make
-								appointment <i class="icofont-simple-right ml-2  "></i>
+								an Appointment <i class="icofont-simple-right ml-2  "></i>
 							</a>
 						</div>
 					</div>
@@ -431,43 +431,45 @@ body {
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="feature-block d-lg-flex">
+							
 							<div class="feature-item mb-5 mb-lg-0">
 								<div class="feature-icon mb-4">
 									<img width="50" height="50"
 										src="${pageContext.request.contextPath}/resources/images/hospital_icon.png">
 									<!-- <i class="icofont-surgeon-alt"></i> -->
 								</div>
-								<span>24 Hours Service</span>
+								<span>Find a Doctor</span>
 								<h4 class="mb-3">Hospital Search</h4>
-								<p class="mb-4">Get ALl time support for emergency.We have
-									introduced the principle of family medicine.</p>
+								<p class="mb-4">Hospitals and Medical Specialties.</p>
 								<a href="<c:url value='/hospital/searchDept'/>"
 									class="btn btn-main btn-round-full">Make an appointment</a>
 							</div>
+							
 							<div class="feature-item mb-5 mb-lg-0">
 								<div class="feature-icon mb-4">
 									<img width="50" height="50"
 										src="${pageContext.request.contextPath}/resources/images/pharmacy_icon.png">
 									<!-- <i class="icofont-surgeon-alt"></i> -->
 								</div>
-								<span>24 Hours Service</span>
+								<span>Visit a Pharmacy</span>
 								<h4 class="mb-3">Pharmacy Search</h4>
-								<p class="mb-4">Get ALl time support for emergency.We have
-									introduced the principle of family medicine.</p>
+								<p class="mb-4">Choose pharmacy that supports language you prefer.</p>
 								<a href="<c:url value='/pharmacy/searchPharm'/>"
 									class="btn btn-main btn-round-full">Search</a>
 							</div>
 
-						<div class="feature-item mb-5 mb-lg-0">
-							<div class="feature-icon mb-4">
-								<i class="icofont-support"></i>
+							<div class="feature-item mb-5 mb-lg-0">
+								<div class="feature-icon mb-4">
+									<img width="50" height="50"
+										src="${pageContext.request.contextPath}/resources/images/review_icon.png">
+									
+								</div>
+								<span>Ratings & Reviews</span>
+								<h4 class="mb-3">Review</h4>
+								<p>Let's take a look at the reviews before you choose a hospital!</p>
+								<a href="<c:url value='/review/review_main'/>"
+									class="btn btn-main btn-round-full">Reviews</a>
 							</div>
-							<span>Emegency Cases</span>
-							<h4 class="mb-3">1-800-700-6200</h4>
-							<p>Get ALl time support for emergency.We have introduced the
-								principle of family medicine.Get Conneted with us for any
-								urgency .</p>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -475,7 +477,7 @@ body {
 	</section>
 
 
-	<section class="section about">
+	<%-- <section class="section about">
 		<div class="container">
 			<div class="row align-items-center">
 				<div class="col-lg-4 col-sm-6">
@@ -510,7 +512,7 @@ body {
 				</div>
 			</div>
 		</div>
-	</section>
+	</section> --%>
 	<section class="cta-section ">
 		<div class="container">
 			<div class="cta position-relative">
@@ -544,7 +546,7 @@ body {
 			</div>
 		</div>
 	</section>
-	<section class="section service gray-bg">
+	<%-- <section class="section service gray-bg">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-7 text-center">
@@ -844,7 +846,7 @@ body {
 				</div>
 			</div>
 		</div>
-	</section>
+	</section> --%>
 	<%-- 	<section class="section clients">
 		<div class="container">
 			<div class="row justify-content-center">
