@@ -228,7 +228,7 @@ String[] month = now.toString().split(" ");
 									<div class="font-weight-bold">
 										<div class="text-truncate">Hi there! I am wondering if
 											you can help me with a problem I've been having.</div>
-										<div class="small text-gray-500">Emily Fowler ¡¤ 58m</div>
+										<div class="small text-gray-500">Emily Fowler ¢®¢´ 58m</div>
 									</div>
 								</a> <a class="dropdown-item d-flex align-items-center" href="#">
 									<div class="dropdown-list-image mr-3">
@@ -240,7 +240,7 @@ String[] month = now.toString().split(" ");
 									<div>
 										<div class="text-truncate">I have the photos that you
 											ordered last month, how would you like them sent to you?</div>
-										<div class="small text-gray-500">Jae Chun ¡¤ 1d</div>
+										<div class="small text-gray-500">Jae Chun ¢®¢´ 1d</div>
 									</div>
 								</a> <a class="dropdown-item d-flex align-items-center" href="#">
 									<div class="dropdown-list-image mr-3">
@@ -253,7 +253,7 @@ String[] month = now.toString().split(" ");
 										<div class="text-truncate">Last month's report looks
 											great, I am very happy with the progress so far, keep up the
 											good work!</div>
-										<div class="small text-gray-500">Morgan Alvarez ¡¤ 2d</div>
+										<div class="small text-gray-500">Morgan Alvarez ¢®¢´ 2d</div>
 									</div>
 								</a> <a class="dropdown-item text-center small text-gray-500"
 									href="#"></a>
@@ -293,7 +293,8 @@ String[] month = now.toString().split(" ");
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800"></h1>
-                    <p class="mb-4">Check your reservations.</p>
+                    <p class="mb-4">Check your reservations.<br>
+                    The visit record you checked cannot be reversed.</p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -301,6 +302,7 @@ String[] month = now.toString().split(" ");
                             <h6 class="m-0 font-weight-bold text-primary">Appointment</h6>
                         </div>
                         <div class="card-body">
+                        	<form:form action = "check_visit">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
@@ -314,6 +316,7 @@ String[] month = now.toString().split(" ");
                                             <th>Nationality</th>
                                             <th>Select language</th>
                                             <th>Message</th>
+                                            <th>visited</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -323,6 +326,10 @@ String[] month = now.toString().split(" ");
                                         	<c:if test = "${app.ap_date eq today}">
                                         	<small class="badge badge-danger"><i class="far fa-clock"></i> today</small>
                                         	</c:if>
+                                        	<c:if test = "${app.ap_date ne today}">
+                                        	<small class="badge badge-info"><i class="far fa-clock"></i> not today</small>
+                                        	</c:if>
+                                        	
                                         	</td>
                                             <td>${app.ap_date}</td>
                                             <td>${app.ap_time}</td>
@@ -332,11 +339,23 @@ String[] month = now.toString().split(" ");
                                             <td>${app.p_nationality}</td>
                                             <td>${app.select_language}</td>
                                             <td>${app.message}</td>
+                                            <td>
+                                            <c:if test = "${app.visited eq 1}">
+                                            	<input type = "checkbox" name = "visited" value="${app.ap_id}" checked disabled/>
+                                            </c:if>
+                                            <c:if test = "${app.visited eq 0}">
+                                            	<input type = "checkbox" name = "visited" value="${app.ap_id}" />
+                                            </c:if>
+                                            </td>
                                         </tr>
                                         </c:forEach>
                                     </tbody>
                                 </table>
+                               <input type="submit"
+										class="btn btn-light btn-icon-split icon text-gray-600 fas fa-check"
+										value="Check">
                             </div>
+                            </form:form>
                         </div>
                     </div>
 
@@ -376,7 +395,7 @@ String[] month = now.toString().split(" ");
 					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
 					<button class="close" type="button" data-dismiss="modal"
 						aria-label="Close">
-						<span aria-hidden="true">¡¿</span>
+						<span aria-hidden="true">¢®¢¯</span>
 					</button>
 				</div>
 				<div class="modal-body">Select "Logout" below if you are ready
@@ -389,6 +408,8 @@ String[] month = now.toString().split(" ");
 			</div>
 		</div>
 	</div>
+	
+
 
     <!-- Bootstrap core JavaScript-->
 	<script

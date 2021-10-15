@@ -98,6 +98,8 @@ public interface dsFacade {
 
 	List<String> getAvaliableTimeList(String doc_id, String day, String date);//서연
 	
+	void checkVisited(String ap_id);
+	
 	//pharmacy
 	List<Pharmacy> getPharmList(String district);
 	

@@ -65,5 +65,11 @@
 		WHERE DOC_ID=#{doc_id} AND AP_DATE=#{date}
 	</select>
 	
+	<update id ="checkVisited" parameterType="java.lang.String">
+		UPDATE APPOINTMENT
+		SET VISITED = '1'
+		WHERE AP_ID = #{ap_id}
+	</update>
+	
 <!-- 21/07/15 11:10 to_timestamp('#{time}','YY/MM/DD HH24:MI')-->
 </mapper>

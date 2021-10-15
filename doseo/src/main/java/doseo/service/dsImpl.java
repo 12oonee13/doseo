@@ -209,6 +209,10 @@ public class dsImpl implements dsFacade {
 		return 0;
 	}
 	
+	public void checkVisited(String ap_id) {
+		appointmentDao.checkVisited(ap_id);
+	}
+	
 	//pharmacy
 	public List<Pharmacy> getPharmList(String district){
 		return pharmacyDao.getPharmList(district);

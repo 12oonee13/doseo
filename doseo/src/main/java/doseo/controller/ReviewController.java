@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,12 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import doseo.command.ReviewCommand;
 import doseo.model.Appointment;
 import doseo.model.Member;
-import doseo.model.Pharmacy;
 import doseo.model.Review;
 import doseo.service.dsFacade;
 
@@ -95,17 +90,6 @@ public class ReviewController {
 		return "member/mypage";
 	
 	}	
-	
-	//전체리뷰 메인페이지
-	@RequestMapping("/review/review_main")
-	public String goReview(Model model) {
-		List<Review> revlist = new ArrayList<>();
-		revlist = ds.getAllReview();
-		
-		model.addAttribute("revlist", revlist);
-		
-		return "/review/review_main";
-	}
 	
 	/*
 	 * @ResponseBody
